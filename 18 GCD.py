@@ -9,34 +9,37 @@ print("GCD of", num1, "and", num2, "is", gcd)
 
 
 
+print("Containers:Sets")
 
-print("Containers: Dictionaries")
+num1 = {100, 110, 120}
 
-d = dict()
+print("Set 'num1': ", num1)
 
-d = {'cat': 'cute', 'dog': 'furry'}
+num1.add(90)
 
-print("Dictionary: ",d)
+print("'num1' after inserting 90: ",num1)
 
-print("Is the dictionary has the key 'cat'? ", 'cat' in d)
+num1.update([50,60,70])
 
-d['fish'] = 'wet'
+print("'num1' after inserting multiple elements:", num1) num1.remove(60)
 
-print("After adding new entry to 'd': ",d)
+print("'num1' after removing 60: ", num1)
 
-print("Get an element monkey: ",d.get('monkey', 'N/A'))
+print("Set comprehension and set operations: ")
 
-print("Get an element fish: ",d.get('fish', 'N/A')) del d['fish']
+n1={x for x in range(10)}
 
-print("After deleting the newly added entry from 'd': ",d)
+print("n1 = ",n1)
 
-print("Demo of dictionary comprehension: ") squares={x:x*x for x in range(10)}
+n2={x for x in range(10) if x%2!=0}
 
-print("Squares of integers of range 10: ")
+print("n2 = ",n2)
 
-for k,v in squares.items():
+print("n1 union n2: ",n1|n2)
 
-print(k,":",v)
+print("n1 intersection n2: ",n1&n2)
+
+print("n1 difference n2: ",n1-n2)
 
 
 
