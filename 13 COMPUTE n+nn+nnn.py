@@ -41,3 +41,28 @@ print(drinks[drinks.continent=='South America'])
 #selection: select a portion of the DataFrame using the index
 
 print(drinks.loc[23, 'beer_servings'])
+
+
+print(drinks.head())
+
+#you can interact with any DataFrame using its index and columns
+
+print(drinks.describe().loc['25%', 'beer_servings'])
+
+#access the Series index
+
+print(drinks.continent.value_counts().index)
+
+#access the Series values
+
+print(drinks.continent.value_counts().values)
+
+#any Series can be sorted by its values
+
+print(drinks.continent.value_counts().sort_values())
+
+people = pd.Series((3000000, 85000], index=['Albania', 'Andorra'], name='population')
+
+# print(pd.concat([drinks, people], axis=1).head())
+
+concatenate the 'drinks' DataFrame with the 'population' Series (aligns by the index)
