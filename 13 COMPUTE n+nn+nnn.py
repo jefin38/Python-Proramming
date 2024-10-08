@@ -5,99 +5,62 @@ print(num)
 
 
 
-
-import pandas as pd ufo = pd.read_csv('http://bit.ly/uforeports') print("Dataframe: ")
-
-print(ufo.head(3))
+import pandas as pd print("Creating dummy variables in pandas: ")
 
 print()
 
-print("Selecting multiple rows and columns from a pandas DataFrame using 'loc": ")
+#read the training dataset from Kaggle's Titanic competition train = pd.read_csv('http://bit.ly/kaggletrain')
+
+print("Dataframe: ")
+
+print(train.head())
 
 print()
 
-#loc method is used to select rows and columns by label print("First row, all columns: ")
-
-print(ufo.loc[0,:])
+#use 'get_dummies' to create one column for every possible value print(pd.get_dummies (train.Sex).head())
 
 print()
 
-print("First 3 rows, all columns: ")
-
-print(ufo.loc[[0, 1, 2), :))
+#drop the first dummy variable ('female') using the 'iloc' method print(pd.get_dummies (train.Sex).iloc[:, 1:].head())
 
 print()
 
-#rows 0 through 2 (inclusive), all columns
-
-print(ufo.loc[0:2, :)
-
-print() #this implies "all columns", but explicitly stating "all columns" is better
-
-print(ufo.loc(0:21)
+#add a prefix to identify the source of the dummy variables print(pd.get_dummies (train.Sex, prefix='Sex').iloc[:, 1:].head())
 
 print()
 
-print("First 3 rows, only one column 'City': ")
+# use 'get_dummies' with a feature that has 3 possible values
 
-print(ufo.loc[0:2, 'City'])
-
-print()
-
-print("First 3 rows, two columns 'City' and 'State': ")
-
-print(ufo.loc[0:2, ['City', 'State']])
-
-print() print("Accomplish the same thing using double brackets: ")
-
-#using 'loc' is preferred since it's more explicit print(ufo['City', 'State']].head(3))
-
-print() print("First 3 rows, columns 'City' through 'State":")
-
-print(ufa.loc[0:2, 'City':'State'])
+print(pd.get_dummies (train.Embarked, prefix='Embarked').head(10))
 
 print()
 
-print("Accomplish the same thing using 'head' and 'drop": ")
+#drop the first dummy variable ('C')
 
-print(ufo.head(3).drop("Time", axis-1))
+print(pd.get_dummies (train. Embarked, prefix='Embarked').iloc[:, 1:].head(10))
 
-print()
+print() #0, 0 means C 1,0 means Q 0, 1 means S
 
-print("Rows in which the 'City' is 'Oakland', column 'State":")
+#reset the DataFrame
 
-print(ufo.loc[ufo.City='Oakland', 'State'])
+train = pd.read_csv('http://bit.ly/kaggletrain')
 
-print()
+print("Dataframe: ")
 
-print("Accomplish the same thing using 'chained indexing":")
-
-#using 'loc' is preferred since chained indexing can cause problems
-
-print(ufo[ufo.City=="Oakland'] State)
+print(train.head())
 
 print()
 
-print("Selecting multiple rows and columns from a pandas DataFrame using "iloc": ")
+#pass the DataFrame to 'get_dummies' and specify which columns to dummy (it drops
+
+#the original columns)
+
+print(pd.get_dummies (train, columns=['Sex', 'Embarked']).head())
 
 print()
 
-print("Rows in positions 0 and 1, columns in positions 0 and 3: ")
+#use the 'drop_first' parameter (new in pandas 0.18) to drop the first dummy variable
 
-print(ufo.iloc[[0, 1], [0, 3]])
+#for each feature
 
-print()
-
-print("Rows in positions 0 through 2 (exclusive), columns in positions 0 through 4
-
-(exclusive): ")
-
-print(ufo.iloc[0:2, 0:41)
-
-print()
-
-print("Rows in positions 0 through 2 (exclusive), all columns: ")
-
-print(ufo.iloc[0:2, :)
-
-print()
+print(pd.get_dummies(train, columns=['Sex', 'Embarked'], drop_first=True).head())
