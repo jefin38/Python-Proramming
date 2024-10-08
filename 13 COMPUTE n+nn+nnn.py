@@ -4,65 +4,100 @@ print(num)
 
 
 
-import pandas as pd ufo = pd.read_csv('http://bit.ly/uforeports')
-
-print(ufo.isnull().tail()) print(ufo.notnull().tail())
-
-print(ufo.isnull().sum())
-
-print(ufo.shape)
-
-# if 'all' values are missing in a row, then drop that row (none are dropped in this case)
-
-print(ufo.dropna(how='all').shape)
-
-20
-
-print(ufo.dropna(subset=['City', 'Shape Reported'], how='any').shape)
-
-print(ufo['Shape Reported'].value_counts().head())
-
-# fill in missing values with a specified value
-
-print(ufo['Shape Reported'].fillna(value='VARIOUS', inplace=True)) # confirm that the missing values were filled in
-
-print(ufo['Shape Reported'].value_counts().head()) drinks = pd.read_csv('http://bit.ly/drinksbycountry') print(drinks.head())
-
-# every DataFrame has an index (sometimes called the "row labels")
-
-print(drinks.index) # index and columns both default to integers if you don't define them
-
-print(pd.read_table('http://bit.ly/movieusers', header=None, sep='|').head())
-
-# identification: index remains with each row when filtering the DataFrame
-
-print(drinks[drinks.continent=='South America'])
-
-#selection: select a portion of the DataFrame using the index
-
-print(drinks.loc[23, 'beer_servings'])
 
 
-print(drinks.head())
+import pandas as pd ufo = pd.read_csv('http://bit.ly/uforeports') print("Dataframe: ")
 
-#you can interact with any DataFrame using its index and columns
+print(ufo.head(3))
 
-print(drinks.describe().loc['25%', 'beer_servings'])
+print()
 
-#access the Series index
+print("Selecting multiple rows and columns from a pandas DataFrame using 'loc": ")
 
-print(drinks.continent.value_counts().index)
+print()
 
-#access the Series values
+#loc method is used to select rows and columns by label print("First row, all columns: ")
 
-print(drinks.continent.value_counts().values)
+print(ufo.loc[0,:])
 
-#any Series can be sorted by its values
+print()
 
-print(drinks.continent.value_counts().sort_values())
+print("First 3 rows, all columns: ")
 
-people = pd.Series((3000000, 85000], index=['Albania', 'Andorra'], name='population')
+print(ufo.loc[[0, 1, 2), :))
 
-# print(pd.concat([drinks, people], axis=1).head())
+print()
 
-concatenate the 'drinks' DataFrame with the 'population' Series (aligns by the index)
+#rows 0 through 2 (inclusive), all columns
+
+print(ufo.loc[0:2, :)
+
+print() #this implies "all columns", but explicitly stating "all columns" is better
+
+print(ufo.loc(0:21)
+
+print()
+
+print("First 3 rows, only one column 'City': ")
+
+print(ufo.loc[0:2, 'City'])
+
+print()
+
+print("First 3 rows, two columns 'City' and 'State': ")
+
+print(ufo.loc[0:2, ['City', 'State']])
+
+print() print("Accomplish the same thing using double brackets: ")
+
+#using 'loc' is preferred since it's more explicit print(ufo['City', 'State']].head(3))
+
+print() print("First 3 rows, columns 'City' through 'State":")
+
+print(ufa.loc[0:2, 'City':'State'])
+
+print()
+
+print("Accomplish the same thing using 'head' and 'drop": ")
+
+print(ufo.head(3).drop("Time", axis-1))
+
+print()
+
+print("Rows in which the 'City' is 'Oakland', column 'State":")
+
+print(ufo.loc[ufo.City='Oakland', 'State'])
+
+print()
+
+print("Accomplish the same thing using 'chained indexing":")
+
+#using 'loc' is preferred since chained indexing can cause problems
+
+print(ufo[ufo.City=="Oakland'] State)
+
+print()
+
+print("Selecting multiple rows and columns from a pandas DataFrame using "iloc": ")
+
+print()
+
+print("Rows in positions 0 and 1, columns in positions 0 and 3: ")
+
+print(ufo.iloc[[0, 1], [0, 3]])
+
+print()
+
+print("Rows in positions 0 through 2 (exclusive), columns in positions 0 through 4
+
+(exclusive): ")
+
+print(ufo.iloc[0:2, 0:41)
+
+print()
+
+print("Rows in positions 0 through 2 (exclusive), all columns: ")
+
+print(ufo.iloc[0:2, :)
+
+print()
