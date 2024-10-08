@@ -7,52 +7,54 @@ print(num)
 
 import pandas as pd
 
-import numpy as np
+#change display options in pandas
 
-#create a DataFrame from a dictionary (keys become column names, values become #data) optionally specify the order of columns and define the index df= pd.DataFrame(('id': [100, 101, 102], 'color': ['red', 'blue', 'red']], columns=['id', 'color'], index=['a', 'b', 'c'])
-
-print("DataFrame from a dictionary: ")
-
-print(df)
+#read a dataset of alcohol consumption into a DataFrame drinks = pd.read_csv('http://bit.ly/drinksbycountry') print("Shape: ", drinks.shape)
 
 print()
 
-#create a DataFrame from a list of lists (each inner list becomes a row)
-
-29
-
-print("DataFrame from a list of lists: ")
-
-print(pd.DataFrame([[100, 'red'], [101, 'blue'], [102, 'red']], columns=['id', 'color']))
+# check the current setting for the 'max_rows' option pd.get_option('display.max_rows') print(drinks)
 
 print()
 
-#create a NumPy array (with shape 4 by 2) and fill it with random numbers between0&1 arr np.random.rand(4, 2)
+#overwrite the current setting so that all rows will be displayed pd.set_option('display.max_rows',2)
 
-print("Numpy array: ") print(arr)
-
-print()
-
-print("DataFrame from the above defined NumPy array: ")
-
-print(pd.DataFrame(arr, columns=['one', 'two'])) print()
-
-print("DataFrame of student IDs (100 through 109) and test scores (random integers
-
-between 60 and 100: ") print(pd.DataFrame(('student':np.arange(100, 110, 1), 'test':np.random.randint(60, 101,
-
-10))))
+print(drinks)
 
 print()
 
-#'set_index' can be chained with the DataFrame constructor to select an index print(pd.DataFrame(('student':np.arange(100, 110, 1), 'test':np.random.randint(60, 101,10))).set_index('student')) print()
+#reset the 'max_rows' option to its default pd.reset_option('display.max_rows')
 
-#create a new Series using the Series constructor s=pd.Series(['round', 'square'], index=['c', 'b'], name='shape")
-
-print(s)
+print(drinks)
 
 print()
 
-#concatenate the DataFrame and the Series (use axis=1 to concatenate columns)
+#add two meaningless columns to the drinks DataFrame
 
-print(pd.concat([df, s], axis=1))
+drinks['x'] = drinks.wine_servings * 1000
+
+drinks['y'] = drinks.total_litres_of_pure_alcohol * 1000 print(drinks.head())
+
+print()
+
+# use a Python format string to specify a comma as the thousands separator
+
+pd.set_option('display.float_format', '(:,}'.format)
+
+print(drinks.head())
+
+print()
+
+#read the training dataset from Kaggle's Titanic competition into a DataFrame train = pd.read_csv('http://bit.ly/kaggletrain')
+
+# an ellipsis is displayed in the 'Name' cell of row 1 because of the 'max_colwidth' option pd.get_option('display.max_colwidth')
+
+print(train.head())
+
+print()
+
+#overwrite the current setting so that more characters will be displayed pd.set_option('display.max_colwidth', 1000)
+
+print(train.head())
+
+print()
