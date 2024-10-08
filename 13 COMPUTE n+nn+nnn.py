@@ -5,62 +5,54 @@ print(num)
 
 
 
-import pandas as pd print("Creating dummy variables in pandas: ")
+import pandas as pd
+
+import numpy as np
+
+#create a DataFrame from a dictionary (keys become column names, values become #data) optionally specify the order of columns and define the index df= pd.DataFrame(('id': [100, 101, 102], 'color': ['red', 'blue', 'red']], columns=['id', 'color'], index=['a', 'b', 'c'])
+
+print("DataFrame from a dictionary: ")
+
+print(df)
 
 print()
 
-#read the training dataset from Kaggle's Titanic competition train = pd.read_csv('http://bit.ly/kaggletrain')
+#create a DataFrame from a list of lists (each inner list becomes a row)
 
-print("Dataframe: ")
+29
 
-print(train.head())
+print("DataFrame from a list of lists: ")
 
-print()
-
-#use 'get_dummies' to create one column for every possible value print(pd.get_dummies (train.Sex).head())
+print(pd.DataFrame([[100, 'red'], [101, 'blue'], [102, 'red']], columns=['id', 'color']))
 
 print()
 
-#drop the first dummy variable ('female') using the 'iloc' method print(pd.get_dummies (train.Sex).iloc[:, 1:].head())
+#create a NumPy array (with shape 4 by 2) and fill it with random numbers between0&1 arr np.random.rand(4, 2)
+
+print("Numpy array: ") print(arr)
 
 print()
 
-#add a prefix to identify the source of the dummy variables print(pd.get_dummies (train.Sex, prefix='Sex').iloc[:, 1:].head())
+print("DataFrame from the above defined NumPy array: ")
+
+print(pd.DataFrame(arr, columns=['one', 'two'])) print()
+
+print("DataFrame of student IDs (100 through 109) and test scores (random integers
+
+between 60 and 100: ") print(pd.DataFrame(('student':np.arange(100, 110, 1), 'test':np.random.randint(60, 101,
+
+10))))
 
 print()
 
-# use 'get_dummies' with a feature that has 3 possible values
+#'set_index' can be chained with the DataFrame constructor to select an index print(pd.DataFrame(('student':np.arange(100, 110, 1), 'test':np.random.randint(60, 101,10))).set_index('student')) print()
 
-print(pd.get_dummies (train.Embarked, prefix='Embarked').head(10))
+#create a new Series using the Series constructor s=pd.Series(['round', 'square'], index=['c', 'b'], name='shape")
 
-print()
-
-#drop the first dummy variable ('C')
-
-print(pd.get_dummies (train. Embarked, prefix='Embarked').iloc[:, 1:].head(10))
-
-print() #0, 0 means C 1,0 means Q 0, 1 means S
-
-#reset the DataFrame
-
-train = pd.read_csv('http://bit.ly/kaggletrain')
-
-print("Dataframe: ")
-
-print(train.head())
+print(s)
 
 print()
 
-#pass the DataFrame to 'get_dummies' and specify which columns to dummy (it drops
+#concatenate the DataFrame and the Series (use axis=1 to concatenate columns)
 
-#the original columns)
-
-print(pd.get_dummies (train, columns=['Sex', 'Embarked']).head())
-
-print()
-
-#use the 'drop_first' parameter (new in pandas 0.18) to drop the first dummy variable
-
-#for each feature
-
-print(pd.get_dummies(train, columns=['Sex', 'Embarked'], drop_first=True).head())
+print(pd.concat([df, s], axis=1))
